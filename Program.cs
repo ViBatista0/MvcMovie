@@ -1,4 +1,13 @@
+ï»¿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using MvcMovie.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Passamos o nosso contexto
+builder.Services.AddDbContext<MvcMovieContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MvcMovieContext") ?? // Falamos para ler a cadeia de caracteres do nosso MvcMovieContext
+    throw new InvalidOperationException("Connection string 'MvcMovieContext' not found."))); // Se der errado, exibe a mensagem
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -21,7 +30,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 
-//O ? indica que o id é opicional
+//O ? indica que o id ï¿½ opicional
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
