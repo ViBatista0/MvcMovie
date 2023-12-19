@@ -10,12 +10,12 @@ namespace MvcMovie.Data
     public class MvcMovieContext : DbContext
     {
         // Como parâmetro, falamos que temos um contexto do banco de dados, e esse contexto será o MvcMovieContext, isso serve para a gente fazer o CRUD.
-        public MvcMovieContext (DbContextOptions<MvcMovieContext> options)
+        public MvcMovieContext(DbContextOptions<MvcMovieContext> options)
             : base(options)
         {
         }
 
         //O DBSet é uma representação do model Movie no BD
-        public DbSet<MvcMovie.Models.Movie> Movie { get; set; } = default!;
+        public DbSet<MvcMovie.Models.Movie> Movie { get; set; }
     }
 }

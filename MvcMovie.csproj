@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\HelloWorld\**" />
+    <Compile Remove="Views\Home\**" />
+    <Content Remove="Views\HelloWorld\**" />
+    <Content Remove="Views\Home\**" />
+    <EmbeddedResource Remove="Views\HelloWorld\**" />
+    <EmbeddedResource Remove="Views\Home\**" />
+    <None Remove="Views\HelloWorld\**" />
+    <None Remove="Views\Home\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
