@@ -1,0 +1,83 @@
+﻿@model MvcMovie.Models.MovieGenreViewModel
+
+<!--Utilizaremos esse modelo de view como principal-->
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<!--Chama o método Create do MoviesController-->
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<!--Um formulário para o controller Movies, que tem como action, para onde será enviado, que é na própria Index, e o método de get
+   pois iremos buscar filmes, se deixar sem, irá fazer um post, retornará a lista, porém um token de post será desnecessáriamente criado.
+-->
+<form asp-controller="Movies" asp-action="Index" method="get">
+    <p>
+
+        <!--No MovieGenreViewModel, temos um atributo chamado MovieGenres, ele irá receber o item (asp-items) que vem do Genre, o gênero selecionado
+            será passado para o atributo MovieGenre através da URL. No método Index, temos o movieGenre como parâmetro, ele irá receber esse gênero, e filtrá-lo.
+            A mesma coisa com o SearchString, o que for digitado, será passado por URL para o parâmetro.
+        -->
+
+        <select asp-for="MovieGenre" asp-items="Model.Genres" >
+            <option value=" ">Todos</option>
+        </select>
+
+        Título: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies![0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies![0].ReleaseDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies![0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies![0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Movies![0].Rating)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Movies!) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReleaseDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+             <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+             </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
